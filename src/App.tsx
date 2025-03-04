@@ -1,5 +1,11 @@
+import { Button } from '@/components/ui/button'
+
 function App() {
-  return <>Hello World!</>
+  return (
+    <div className="flex flex-col items-center justify-center min-h-svh">
+      <Button onClick={() => alert('hi')}>Click me</Button>
+    </div>
+  )
 }
 
 export default App
