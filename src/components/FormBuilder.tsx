@@ -1,31 +1,35 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+import { v4 as uuidv4 } from 'uuid'
+import {
+  BaseButton,
+  BaseInput,
+  BaseTextArea,
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui'
 import type { Form, Question, QuestionType } from '@/types/form'
+import { Loader2, Plus } from 'lucide-react'
+
 // import { getForm, saveForm } from '@/services/api'
 // import { useToast } from '@/components/ui/use-toast'
-import { Loader2, Plus } from 'lucide-react'
 // import QuestionBuilder from '@/components/question-builder'
-import { v4 as uuidv4 } from 'uuid'
 
 interface FormBuilderProps {
   onFormChange: (form: Form) => void
 }
-
-export default function FormBuilder({ onFormChange }: FormBuilderProps) {
+function FormBuilder({ onFormChange }: FormBuilderProps) {
   const [form, setForm] = useState<Form>({
     id: uuidv4(),
     title: 'Untitled Form',
-    description: 'lorem',
+    description: '',
     questions: [],
   })
   const [loading, setLoading] = useState(false)
   const [saving, setSaving] = useState(true)
-  //   const { toast } = useToast()
 
   useEffect(() => {}, [])
 
@@ -48,14 +52,14 @@ export default function FormBuilder({ onFormChange }: FormBuilderProps) {
         </CardHeader>
         <CardContent className="space-y-4">
           <div>
-            <Input
+            <BaseInput
               placeholder="Form Title"
               value={form.title}
               onChange={() => null}
             />
           </div>
           <div>
-            <Textarea
+            <BaseTextArea
               placeholder="Form Description"
               value={form.description || ''}
               onChange={() => null}
@@ -68,16 +72,18 @@ export default function FormBuilder({ onFormChange }: FormBuilderProps) {
       <div className="space-y-4">{/* Questions Builder */}</div>
 
       <div className="flex gap-2">
-        <Button onClick={() => null} variant="outline">
+        <BaseButton onClick={() => null} variant="outline">
           <Plus className="mr-2 h-4 w-4" /> Text
-        </Button>
-        <Button onClick={() => null} variant="outline">
+        </BaseButton>
+        <BaseButton onClick={() => null} variant="outline">
           <Plus className="mr-2 h-4 w-4" /> Number
-        </Button>
-        <Button onClick={() => null} variant="outline">
+        </BaseButton>
+        <BaseButton onClick={() => null} variant="outline">
           <Plus className="mr-2 h-4 w-4" /> Select
-        </Button>
+        </BaseButton>
       </div>
     </div>
   )
 }
+
+export default FormBuilder
